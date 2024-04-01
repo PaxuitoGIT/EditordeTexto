@@ -97,6 +97,7 @@ public class FuncionesArchivo {
         System.exit(0);
     }
 
+    // Menú ver
     public String Comparar() {
         FileDialog fd1 = new FileDialog(app.ventana, "Seleccionar archivo 1", FileDialog.LOAD);
         fd1.setVisible(true);

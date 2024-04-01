@@ -26,11 +26,12 @@ public class App implements ActionListener {
     JMenuItem iSaltoLinea, iFuenteArial, iFuenteCSMS, iFuenteTNR, iFuenteTamano8, iFuenteTamano12, iFuenteTamano16, iFuenteTamano20, iFuenteTamano24, iFuenteTamano28;
     JMenu menuTamanoFuente, menuTipoFuente;
     //Ver Menú Items
-    JMenuItem iComparar;
+    JMenuItem iComparar, iAnalizarTexto;
 
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
+    FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
     UndoManager um = new UndoManager();
 
     public static void main( String[] args ) {
@@ -200,6 +201,11 @@ public class App implements ActionListener {
         iComparar.addActionListener(this);
         iComparar.setActionCommand("Comparar");
         menuVer.add(iComparar);
+
+        iAnalizarTexto = new JMenuItem("Analizar Texto");
+        iAnalizarTexto.addActionListener(this);
+        iAnalizarTexto.setActionCommand("AnalizarTexto");
+        menuVer.add(iAnalizarTexto);
     }
 
     @Override
@@ -265,6 +271,10 @@ public class App implements ActionListener {
             case "Comparar":
                 String resultado = funcionesArchivo.Comparar();
                 textArea.setText(resultado);
+                break;
+            case "AnalizarTexto":
+                String resultadoAnalizar = funcionesVer.AnalizarTexto();
+                textArea.setText(resultadoAnalizar);
                 break;
         }
     }
