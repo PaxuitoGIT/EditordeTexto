@@ -1,6 +1,9 @@
 package EditorTexto;
 
 import javax.swing.*;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.undo.UndoManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,12 +20,18 @@ public class App implements ActionListener {
     JMenu menuArchivo, menuEditar, menuFormato, menuVer;
     // Archivo Menú Items
     JMenuItem iNuevo, iAbrir, iGuardar, iGuardarComo, iSalir;
+    // Editar Menú
+    JMenuItem iDeshacer, iRehacer;
     //Formato Menú Items
     JMenuItem iSaltoLinea, iFuenteArial, iFuenteCSMS, iFuenteTNR, iFuenteTamano8, iFuenteTamano12, iFuenteTamano16, iFuenteTamano20, iFuenteTamano24, iFuenteTamano28;
     JMenu menuTamanoFuente, menuTipoFuente;
 
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
+    FuncionesEditar funcionesEditar = new FuncionesEditar(this);
+
+    UndoManager um = new UndoManager();
+
     public static void main( String[] args ) {
 
         new App();
@@ -33,7 +42,8 @@ public class App implements ActionListener {
         CrearVentana();
         CrearTextArea();
         CrearBarraMenu();
-        CrearItemsMenu();
+        CrearItemsMenuArchivo();
+        crearItemsMenuEditar();
         CrearItemsMenuFormato();
 
         funcionesFormato.FuenteSelect = "Arial";
@@ -53,6 +63,12 @@ public class App implements ActionListener {
     public void CrearTextArea() {
 
         textArea = new JTextArea();
+
+        textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
+            public void undoableEditHappened(UndoableEditEvent e) {
+                um.addEdit(e.getEdit());
+            }
+        });
 
         scrollVentana = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollVentana.setBorder(BorderFactory.createEmptyBorder());
@@ -79,7 +95,7 @@ public class App implements ActionListener {
 
     }
 
-    public void CrearItemsMenu() {
+    public void CrearItemsMenuArchivo() {
 
         iNuevo = new JMenuItem("Nuevo");
         iNuevo.addActionListener(this);
@@ -105,6 +121,18 @@ public class App implements ActionListener {
         iSalir.addActionListener(this);
         iSalir.setActionCommand("Salir");
         menuArchivo.add(iSalir);
+    }
+
+    public void crearItemsMenuEditar() {
+        iDeshacer = new JMenuItem("Deshacer");
+        iDeshacer.addActionListener(this);
+        iDeshacer.setActionCommand("Deshacer");
+        menuEditar.add(iDeshacer);
+
+        iRehacer = new JMenuItem("Rehacer");
+        iRehacer.addActionListener(this);
+        iRehacer.setActionCommand("Rehacer");
+        menuEditar.add(iRehacer);
     }
 
     public void CrearItemsMenuFormato() {
@@ -185,6 +213,12 @@ public class App implements ActionListener {
                 break;
             case "Salir":
                 System.exit(0);
+                break;
+            case "Deshacer":
+                funcionesEditar.Deshacer();
+                break;
+            case "Rehacer":
+                funcionesEditar.Rehacer();
                 break;
             case "Salto de Linea":
                 funcionesFormato.SaltoLinea();
