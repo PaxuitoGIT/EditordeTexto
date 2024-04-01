@@ -79,12 +79,18 @@ public class App implements ActionListener {
         menuArchivo.add(iAbrir);
 
         iGuardar = new JMenuItem("Guardar");
+        iGuardar.addActionListener(this);
+        iGuardar.setActionCommand("Guardar");
         menuArchivo.add(iGuardar);
 
         iGuardarComo = new JMenuItem("Guardar Como");
+        iGuardarComo.addActionListener(this);
+        iGuardarComo.setActionCommand("Guardar Como");
         menuArchivo.add(iGuardarComo);
 
         iSalir = new JMenuItem("Salir");
+        iSalir.addActionListener(this);
+        iSalir.setActionCommand("Salir");
         menuArchivo.add(iSalir);
 
     }
@@ -100,6 +106,15 @@ public class App implements ActionListener {
                 break;
             case "Abrir":
                 funcionesArchivo.Abrir();
+                break;
+            case "Guardar Como":
+                funcionesArchivo.GuardarComo();
+                break;
+            case "Guardar":
+                funcionesArchivo.Guardar();
+                break;
+            case "Salir":
+                System.exit(0);
                 break;
         }
     }
