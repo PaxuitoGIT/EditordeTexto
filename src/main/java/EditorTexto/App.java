@@ -6,6 +6,7 @@ public class App {
 
     JFrame ventana;
     JTextArea textArea;
+    JScrollPane scrollVentana;
     public static void main( String[] args ) {
 
         new App();
@@ -30,7 +31,10 @@ public class App {
     public void CrearTextArea() {
 
         textArea = new JTextArea();
-        ventana.add(textArea);
+
+        scrollVentana = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollVentana.setBorder(BorderFactory.createEmptyBorder());
+        ventana.add(scrollVentana);
 
     }
 }
