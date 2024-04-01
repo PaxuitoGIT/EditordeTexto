@@ -7,6 +7,9 @@ public class App {
     JFrame ventana;
     JTextArea textArea;
     JScrollPane scrollVentana;
+    JMenuBar barraMenu;
+    JMenu menuArchivo, menuEditar, menuFormato, menuVer;
+    JMenuItem iNuevo, iAbrir, iGuardar, iGuardarComo, iSalir;
     public static void main( String[] args ) {
 
         new App();
@@ -16,6 +19,8 @@ public class App {
 
         CrearVentana();
         CrearTextArea();
+        CrearBarraMenu();
+        CrearItemsMenu();
 
         ventana.setVisible(true);
     }
@@ -35,6 +40,44 @@ public class App {
         scrollVentana = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollVentana.setBorder(BorderFactory.createEmptyBorder());
         ventana.add(scrollVentana);
+
+    }
+
+    public void CrearBarraMenu() {
+
+        barraMenu = new JMenuBar();
+        ventana.setJMenuBar(barraMenu);
+
+        menuArchivo = new JMenu("Archivo");
+        barraMenu.add(menuArchivo);
+
+        menuEditar = new JMenu("Editar");
+        barraMenu.add(menuEditar);
+
+        menuFormato = new JMenu("Formato");
+        barraMenu.add(menuFormato);
+
+        menuVer = new JMenu("Ver");
+        barraMenu.add(menuVer);
+
+    }
+
+    public void CrearItemsMenu() {
+
+        iNuevo = new JMenuItem("Nuevo");
+        menuArchivo.add(iNuevo);
+
+        iAbrir = new JMenuItem("Abrir");
+        menuArchivo.add(iAbrir);
+
+        iGuardar = new JMenuItem("Guardar");
+        menuArchivo.add(iGuardar);
+
+        iGuardarComo = new JMenuItem("Guardar Como");
+        menuArchivo.add(iGuardarComo);
+
+        iSalir = new JMenuItem("Salir");
+        menuArchivo.add(iSalir);
 
     }
 }
