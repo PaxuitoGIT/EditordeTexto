@@ -25,11 +25,12 @@ public class App implements ActionListener {
     //Formato Menú Items
     JMenuItem iSaltoLinea, iFuenteArial, iFuenteCSMS, iFuenteTNR, iFuenteTamano8, iFuenteTamano12, iFuenteTamano16, iFuenteTamano20, iFuenteTamano24, iFuenteTamano28;
     JMenu menuTamanoFuente, menuTipoFuente;
+    //Ver Menú Items
+    JMenuItem iComparar;
 
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
-
     UndoManager um = new UndoManager();
 
     public static void main( String[] args ) {
@@ -45,6 +46,7 @@ public class App implements ActionListener {
         CrearItemsMenuArchivo();
         crearItemsMenuEditar();
         CrearItemsMenuFormato();
+        crearItemsMenuVer();
 
         funcionesFormato.FuenteSelect = "Arial";
         funcionesFormato.crearFuente(12);
@@ -193,6 +195,13 @@ public class App implements ActionListener {
         menuTamanoFuente.add(iFuenteTamano28);
     }
 
+    public void crearItemsMenuVer() {
+        iComparar = new JMenuItem("Comparar");
+        iComparar.addActionListener(this);
+        iComparar.setActionCommand("Comparar");
+        menuVer.add(iComparar);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -252,6 +261,10 @@ public class App implements ActionListener {
                 break;
             case "28":
                 funcionesFormato.crearFuente(28);
+                break;
+            case "Comparar":
+                String resultado = funcionesArchivo.Comparar();
+                textArea.setText(resultado);
                 break;
         }
     }
