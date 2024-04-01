@@ -1,8 +1,10 @@
 package EditorTexto;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class App {
+public class App implements ActionListener {
 
     JFrame ventana;
     JTextArea textArea;
@@ -10,6 +12,8 @@ public class App {
     JMenuBar barraMenu;
     JMenu menuArchivo, menuEditar, menuFormato, menuVer;
     JMenuItem iNuevo, iAbrir, iGuardar, iGuardarComo, iSalir;
+
+    FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     public static void main( String[] args ) {
 
         new App();
@@ -65,9 +69,13 @@ public class App {
     public void CrearItemsMenu() {
 
         iNuevo = new JMenuItem("Nuevo");
+        iNuevo.addActionListener(this);
+        iNuevo.setActionCommand("Nuevo");
         menuArchivo.add(iNuevo);
 
         iAbrir = new JMenuItem("Abrir");
+        iAbrir.addActionListener(this);
+        iAbrir.setActionCommand("Abrir");
         menuArchivo.add(iAbrir);
 
         iGuardar = new JMenuItem("Guardar");
@@ -79,5 +87,20 @@ public class App {
         iSalir = new JMenuItem("Salir");
         menuArchivo.add(iSalir);
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String comando = e.getActionCommand();
+
+        switch (comando) {
+            case "Nuevo":
+                funcionesArchivo.newNuevo();
+                break;
+            case "Abrir":
+                funcionesArchivo.Abrir();
+                break;
+        }
     }
 }
