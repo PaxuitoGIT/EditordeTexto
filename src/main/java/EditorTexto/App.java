@@ -36,6 +36,9 @@ public class App implements ActionListener {
         CrearItemsMenu();
         CrearItemsMenuFormato();
 
+        funcionesFormato.FuenteSelect = "Arial";
+        funcionesFormato.crearFuente(12);
+        funcionesFormato.SaltoLinea();
         ventana.setVisible(true);
     }
 
@@ -185,6 +188,36 @@ public class App implements ActionListener {
                 break;
             case "Salto de Linea":
                 funcionesFormato.SaltoLinea();
+                break;
+            case "Arial":
+                funcionesFormato.FuenteSelect = "Arial";
+                funcionesFormato.crearFuente(textArea.getFont().getSize());
+                break;
+            case "Comic Sans MS":
+                funcionesFormato.FuenteSelect = "Comic Sans MS";
+                funcionesFormato.crearFuente(textArea.getFont().getSize());
+                break;
+            case "Times New Roman":
+                funcionesFormato.FuenteSelect = "Times New Roman";
+                funcionesFormato.crearFuente(textArea.getFont().getSize());
+                break;
+            case "8":
+                funcionesFormato.crearFuente(8);
+                break;
+            case "12":
+                funcionesFormato.crearFuente(12);
+                break;
+            case "16":
+                funcionesFormato.crearFuente(16);
+                break;
+            case "20":
+                funcionesFormato.crearFuente(20);
+                break;
+            case "24":
+                funcionesFormato.crearFuente(24);
+                break;
+            case "28":
+                funcionesFormato.crearFuente(28);
                 break;
         }
     }
