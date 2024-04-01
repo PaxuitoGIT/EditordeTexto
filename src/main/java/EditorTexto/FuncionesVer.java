@@ -58,4 +58,14 @@ public class FuncionesVer {
         return resultado.toString();
     }
 
+    public int buscarPalabra(String texto, String palabra) {
+        String[] palabras = texto.split("\\s+");
+        int contador = 0;
+        for (String p : palabras) {
+            if (p.equalsIgnoreCase(palabra)) {
+                contador++;
+            }
+        }
+        return contador;
+    }
 }

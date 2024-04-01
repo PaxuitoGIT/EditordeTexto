@@ -26,7 +26,7 @@ public class App implements ActionListener {
     JMenuItem iSaltoLinea, iFuenteArial, iFuenteCSMS, iFuenteTNR, iFuenteTamano8, iFuenteTamano12, iFuenteTamano16, iFuenteTamano20, iFuenteTamano24, iFuenteTamano28;
     JMenu menuTamanoFuente, menuTipoFuente;
     //Ver Menú Items
-    JMenuItem iComparar, iAnalizarTexto;
+    JMenuItem iComparar, iAnalizarTexto, iBuscarPalabra;
 
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
@@ -206,6 +206,11 @@ public class App implements ActionListener {
         iAnalizarTexto.addActionListener(this);
         iAnalizarTexto.setActionCommand("AnalizarTexto");
         menuVer.add(iAnalizarTexto);
+
+        iBuscarPalabra = new JMenuItem("Buscar Palabra");
+        iBuscarPalabra.addActionListener(this);
+        iBuscarPalabra.setActionCommand("BuscarPalabra");
+        menuVer.add(iBuscarPalabra);
     }
 
     @Override
@@ -275,6 +280,13 @@ public class App implements ActionListener {
             case "AnalizarTexto":
                 String resultadoAnalizar = funcionesVer.AnalizarTexto();
                 textArea.setText(resultadoAnalizar);
+                break;
+            case "BuscarPalabra":
+                String palabra = JOptionPane.showInputDialog("Ingrese la palabra a buscar:");
+                if (palabra != null && !palabra.isEmpty()) {
+                    int contador = funcionesVer.buscarPalabra(textArea.getText(), palabra);
+                    JOptionPane.showMessageDialog(ventana, "La palabra '" + palabra + "' aparece " + contador + " veces.");
+                }
                 break;
         }
     }
