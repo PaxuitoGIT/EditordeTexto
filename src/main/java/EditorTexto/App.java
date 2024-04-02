@@ -6,6 +6,8 @@ import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App implements ActionListener {
 
@@ -34,7 +36,9 @@ public class App implements ActionListener {
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
     FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
+    FuncionesContacto funcionesContacto = new FuncionesContacto();
 
+    public static List<FuncionesContacto.Contacto> listaContactos = new ArrayList<>();
     UndoManager um = new UndoManager();
 
     public static void main( String[] args ) {
