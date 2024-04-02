@@ -312,7 +312,7 @@ public class App implements ActionListener {
                 funcionesFormato.crearFuente(28);
                 break;
             case "Comparar":
-                String resultado = funcionesArchivo.Comparar();
+                String resultado = funcionesVer.Comparar();
                 textArea.setText(resultado);
                 break;
             case "AnalizarTexto":
