@@ -39,6 +39,23 @@ public class FuncionesContacto extends JPanel {
 
     }
 
+    public void agregarContacto() {
+        FuncionesContacto formPanel = new FuncionesContacto();
+        JFrame frame = new JFrame("Agregar Contacto");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(formPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public void mostrarContacto() {
+        FileDialog fileDialog = new FileDialog((Frame)null, "Selecciona el archivo de contacto");
+        fileDialog.setDirectory(System.getProperty("user.dir")); // Esto apunta al directorio del proyecto supuestamente
+        fileDialog.setMode(FileDialog.LOAD);
+        fileDialog.setVisible(true);
+    }
+
     public JPanel createButtonsPane() {
 
         JPanel panel = new JPanel(new FlowLayout());

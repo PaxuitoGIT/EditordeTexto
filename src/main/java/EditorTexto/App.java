@@ -30,7 +30,7 @@ public class App implements ActionListener {
     //Ver Menú Items
     JMenuItem iComparar, iAnalizarTexto, iBuscarPalabra;
     // Menú Agenda
-    JMenuItem iAgregarContacto, iEditarContacto, iEliminarContacto, iMostrarContacto;
+    JMenuItem iAgregarContacto, iMostrarContacto;
     // Funciones
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
@@ -244,16 +244,6 @@ public class App implements ActionListener {
         iAgregarContacto.setActionCommand("AgregarContacto");
         menuAgenda.add(iAgregarContacto);
 
-        iEditarContacto = new JMenuItem("Editar Contacto");
-        iEditarContacto.addActionListener(this);
-        iEditarContacto.setActionCommand("EditarContacto");
-        menuAgenda.add(iEditarContacto);
-
-        iEliminarContacto = new JMenuItem("Eliminar Contacto");
-        iEliminarContacto.addActionListener(this);
-        iEliminarContacto.setActionCommand("EliminarContacto");
-        menuAgenda.add(iEliminarContacto);
-
         iMostrarContacto = new JMenuItem("Mostrar Contacto");
         iMostrarContacto.addActionListener(this);
         iMostrarContacto.setActionCommand("MostrarContacto");
@@ -337,13 +327,10 @@ public class App implements ActionListener {
                 }
                 break;
             case "AgregarContacto":
-                FuncionesContacto formPanel = new FuncionesContacto();
-                JFrame frame = new JFrame("Agregar Contacto");
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.getContentPane().add(formPanel);
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                funcionesContacto.agregarContacto();
+                break;
+            case "MostrarContacto":
+                funcionesContacto.mostrarContacto();
                 break;
         }
     }
