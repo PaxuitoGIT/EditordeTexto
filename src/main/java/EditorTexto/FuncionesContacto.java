@@ -5,10 +5,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 
 public class FuncionesContacto extends JPanel {
 
+    App app;
     JTextField nombre;
     JTextField Descripcion;
     JTextField telefono;
@@ -31,7 +34,8 @@ public class FuncionesContacto extends JPanel {
             this.descripcion = descripcion;
         }
     }
-    public FuncionesContacto() {
+    public FuncionesContacto(App app) {
+        this.app = app;
 
         setLayout(new BorderLayout());
         add(createFieldsPane(), BorderLayout.CENTER);
@@ -40,7 +44,7 @@ public class FuncionesContacto extends JPanel {
     }
 
     public void agregarContacto() {
-        FuncionesContacto formPanel = new FuncionesContacto();
+        FuncionesContacto formPanel = new FuncionesContacto(app);
         JFrame frame = new JFrame("Agregar Contacto");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(formPanel);
@@ -50,10 +54,31 @@ public class FuncionesContacto extends JPanel {
     }
 
     public void mostrarContacto() {
-        FileDialog fileDialog = new FileDialog((Frame)null, "Selecciona el archivo de contacto");
-        fileDialog.setDirectory(System.getProperty("user.dir")); // Esto apunta al directorio del proyecto supuestamente
-        fileDialog.setMode(FileDialog.LOAD);
-        fileDialog.setVisible(true);
+        FileDialog fd = new FileDialog((Frame) null, "Selecciona el archivo de contacto");
+        fd.setDirectory(System.getProperty("user.dir")); // Esto apunta al directorio del proyecto supuestamente
+        fd.setMode(FileDialog.LOAD);
+        fd.setVisible(true);
+
+        if (fd.getFile() != null) {
+            String nombreArchivo = fd.getFile();
+            String direccionArchivo = fd.getDirectory();
+            app.ventana.setTitle(nombreArchivo);
+
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(direccionArchivo + nombreArchivo));
+
+                app.textArea.setText("");
+
+                String line;
+
+                while ((line = br.readLine()) != null) {
+                    app.textArea.append(line + "\n");
+                }
+                br.close();
+            } catch (Exception e) {
+                System.out.println("Error al abrir el archivo");
+            }
+        }
     }
 
     public JPanel createButtonsPane() {

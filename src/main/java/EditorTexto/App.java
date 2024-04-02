@@ -36,7 +36,7 @@ public class App implements ActionListener {
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
     FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
-    FuncionesContacto funcionesContacto = new FuncionesContacto();
+    FuncionesContacto funcionesContacto = new FuncionesContacto(this);
 
     public static List<FuncionesContacto.Contacto> listaContactos = new ArrayList<>();
     UndoManager um = new UndoManager();
