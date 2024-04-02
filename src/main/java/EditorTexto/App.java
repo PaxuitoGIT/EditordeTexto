@@ -28,6 +28,7 @@ public class App implements ActionListener {
     //Ver Menú Items
     JMenuItem iComparar, iAnalizarTexto, iBuscarPalabra;
 
+    // Funciones
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
@@ -39,6 +40,8 @@ public class App implements ActionListener {
         new App();
 
     }
+
+    // Constructor
     public App() {
 
         CrearVentana();
@@ -49,12 +52,14 @@ public class App implements ActionListener {
         CrearItemsMenuFormato();
         crearItemsMenuVer();
 
+        // Formato predeterminado
         funcionesFormato.FuenteSelect = "Arial";
         funcionesFormato.crearFuente(12);
         funcionesFormato.SaltoLinea();
         ventana.setVisible(true);
     }
 
+    // Crea la ventana de la aplicación
     public void CrearVentana() {
 
         ventana = new JFrame("Editor de Texto");
@@ -63,22 +68,26 @@ public class App implements ActionListener {
 
     }
 
+    // Crea el área de texto
     public void CrearTextArea() {
 
         textArea = new JTextArea();
 
+        // Deshacer y Rehacer
         textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
             public void undoableEditHappened(UndoableEditEvent e) {
                 um.addEdit(e.getEdit());
             }
         });
 
+        // Barra de desplazamiento
         scrollVentana = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollVentana.setBorder(BorderFactory.createEmptyBorder());
         ventana.add(scrollVentana);
 
     }
 
+    // Crea la barra de menú
     public void CrearBarraMenu() {
 
         barraMenu = new JMenuBar();
@@ -98,6 +107,7 @@ public class App implements ActionListener {
 
     }
 
+    // Crea los items del menú Archivo
     public void CrearItemsMenuArchivo() {
 
         iNuevo = new JMenuItem("Nuevo");
@@ -126,6 +136,7 @@ public class App implements ActionListener {
         menuArchivo.add(iSalir);
     }
 
+    // Crea los items del menú Editar
     public void crearItemsMenuEditar() {
         iDeshacer = new JMenuItem("Deshacer");
         iDeshacer.addActionListener(this);
@@ -138,6 +149,7 @@ public class App implements ActionListener {
         menuEditar.add(iRehacer);
     }
 
+    // Crea los items del menú Formato
     public void CrearItemsMenuFormato() {
         iSaltoLinea = new JMenuItem("Salto de Linea: Desactivado");
         iSaltoLinea.addActionListener(this);
@@ -147,6 +159,7 @@ public class App implements ActionListener {
         menuTipoFuente = new JMenu("Tipo de Fuente");
         menuFormato.add(menuTipoFuente);
 
+        // Fuentes
         iFuenteArial = new JMenuItem("Arial");
         iFuenteArial.addActionListener(this);
         iFuenteArial.setActionCommand("Arial");
@@ -165,6 +178,7 @@ public class App implements ActionListener {
         menuTamanoFuente = new JMenu("Tamaño de Fuente");
         menuFormato.add(menuTamanoFuente);
 
+        // Tamaños de fuente
         iFuenteTamano8 = new JMenuItem("8");
         iFuenteTamano8.addActionListener(this);
         iFuenteTamano8.setActionCommand("8");
@@ -196,6 +210,7 @@ public class App implements ActionListener {
         menuTamanoFuente.add(iFuenteTamano28);
     }
 
+    // Crea los items del menú Ver
     public void crearItemsMenuVer() {
         iComparar = new JMenuItem("Comparar");
         iComparar.addActionListener(this);
@@ -213,6 +228,7 @@ public class App implements ActionListener {
         menuVer.add(iBuscarPalabra);
     }
 
+    // Acciones de los botones
     @Override
     public void actionPerformed(ActionEvent e) {
 

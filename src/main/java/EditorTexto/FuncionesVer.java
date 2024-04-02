@@ -10,12 +10,15 @@ public class FuncionesVer {
     App app;
     FuncionesArchivo funcionesArchivo;
 
+    // Heredar el constructor de la clase App y FuncionesArchivo
     public FuncionesVer(App app, FuncionesArchivo funcionesArchivo) {
         this.app = app;
         this.funcionesArchivo = funcionesArchivo;
     }
 
+    // Analiza el texto de un archivo y devuelve el número de palabras y la frecuencia de cada una
     public String AnalizarTexto() {
+        // Lee el archivo seleccionado
         FileDialog fd = new FileDialog(app.ventana, "Seleccione archivo para analizar", FileDialog.LOAD);
         fd.setVisible(true);
         if (fd.getFile() != null) {
@@ -34,11 +37,14 @@ public class FuncionesVer {
             }
             br.close();
 
+            // Divide el texto en palabras
             String[] palabras = sb.toString().split("\\s+");
 
+            // Cuenta el número de palabras
             int numPalabras = palabras.length;
             resultado.append("Número de palabras: ").append(numPalabras).append("\n");
 
+            // Cuenta la frecuencia de cada palabra
             Map<String, Integer> frecuenciaPalabras = new HashMap<>();
             for (String palabra : palabras) {
                 String palabraLimpia = palabra.replaceAll("[^a-zA-Z]", "").toLowerCase();
@@ -47,6 +53,7 @@ public class FuncionesVer {
                 }
             }
 
+            // Ordena las palabras por frecuencia en orden descendente
             resultado.append("Frecuencia de palabras:").append("\n");
             frecuenciaPalabras.entrySet().stream()
                     .sorted(Map.Entry.<String,Integer>comparingByValue().reversed())
@@ -58,6 +65,7 @@ public class FuncionesVer {
         return resultado.toString();
     }
 
+    // Busca una palabra en un texto y devuelve el número de veces que aparece
     public int buscarPalabra(String texto, String palabra) {
         String[] palabras = texto.split("\\s+");
         int contador = 0;

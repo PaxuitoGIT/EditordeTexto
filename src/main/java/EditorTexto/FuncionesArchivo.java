@@ -12,12 +12,15 @@ public class FuncionesArchivo {
     App app;
     String NombreArchivo;
     String DireccionArchivo;
+
+    // Heredar el constructor de la clase App
     public FuncionesArchivo(App app) {
 
         this.app = app;
 
     }
 
+    // Crea un nuevo archivo
     public void newNuevo() {
 
         app.textArea.setText("");
@@ -26,11 +29,13 @@ public class FuncionesArchivo {
         DireccionArchivo = null;
     }
 
+    // Abre un archivo
     public void Abrir() {
 
         FileDialog fd = new FileDialog(app.ventana, "Abrir", FileDialog.LOAD);
         fd.setVisible(true);
 
+        // Busca la dirección y el nombre del archivo
         if(fd.getFile() != null) {
             NombreArchivo = fd.getFile();
             DireccionArchivo = fd.getDirectory();
@@ -54,8 +59,10 @@ public class FuncionesArchivo {
         }
     }
 
+    // Guarda el archivo
     public void Guardar() {
 
+        // Sobre escribe el archivo
         if(NombreArchivo == null) {
             GuardarComo();
         } else {
@@ -72,6 +79,7 @@ public class FuncionesArchivo {
 
     }
 
+    // Guarda el archivo como
     public void GuardarComo() {
 
         FileDialog fd = new FileDialog(app.ventana, "Guardar como", FileDialog.SAVE);
@@ -93,6 +101,7 @@ public class FuncionesArchivo {
         }
     }
 
+    // Salir del programa
     public void Salir() {
         System.exit(0);
     }

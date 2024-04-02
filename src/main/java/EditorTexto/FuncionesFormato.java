@@ -8,12 +8,14 @@ public class FuncionesFormato {
     Font arial, CSMS, TNR;
     String FuenteSelect;
 
+    // Heredar el constructor de la clase App
     public FuncionesFormato(App app) {
 
         this.app = app;
 
     }
 
+    // Cambia si el texto se sobresale de la ventana, que haga un salto de línea si está activado o no
     public void SaltoLinea() {
 
         if (app.SaltoLineaOn == false) {
@@ -29,6 +31,7 @@ public class FuncionesFormato {
         }
     }
 
+    // Crea una nueva fuente
         public void crearFuente (int tamanoFuente) {
 
             arial = new Font("Arial", Font.PLAIN, tamanoFuente);
@@ -39,6 +42,7 @@ public class FuncionesFormato {
 
         }
 
+        // Cambia la fuente del texto
         public void setFuente(String fuente) {
 
         FuenteSelect = fuente;
