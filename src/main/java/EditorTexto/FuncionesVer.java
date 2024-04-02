@@ -31,7 +31,7 @@ public class FuncionesVer {
         try {
             BufferedReader br = new BufferedReader(new FileReader(funcionesArchivo.DireccionArchivo + funcionesArchivo.NombreArchivo));
             StringBuilder sb = new StringBuilder();
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line).append(" ");
             }

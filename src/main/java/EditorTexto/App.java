@@ -17,7 +17,7 @@ public class App implements ActionListener {
     boolean SaltoLineaOn = false;
     // Menú Barra
     JMenuBar barraMenu;
-    JMenu menuArchivo, menuEditar, menuFormato, menuVer;
+    JMenu menuArchivo, menuEditar, menuFormato, menuVer, menuAgenda;
     // Archivo Menú Items
     JMenuItem iNuevo, iAbrir, iGuardar, iGuardarComo, iSalir;
     // Editar Menú
@@ -27,12 +27,14 @@ public class App implements ActionListener {
     JMenu menuTamanoFuente, menuTipoFuente;
     //Ver Menú Items
     JMenuItem iComparar, iAnalizarTexto, iBuscarPalabra;
-
+    // Menú Agenda
+    JMenuItem iAgregarContacto, iEditarContacto, iEliminarContacto, iMostrarContacto;
     // Funciones
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
     FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
+
     UndoManager um = new UndoManager();
 
     public static void main( String[] args ) {
@@ -51,6 +53,7 @@ public class App implements ActionListener {
         crearItemsMenuEditar();
         CrearItemsMenuFormato();
         crearItemsMenuVer();
+        crearItemsMenuAgenda();
 
         // Formato predeterminado
         funcionesFormato.FuenteSelect = "Arial";
@@ -104,6 +107,9 @@ public class App implements ActionListener {
 
         menuVer = new JMenu("Ver");
         barraMenu.add(menuVer);
+
+        menuAgenda = new JMenu("Agenda");
+        barraMenu.add(menuAgenda);
 
     }
 
@@ -228,6 +234,28 @@ public class App implements ActionListener {
         menuVer.add(iBuscarPalabra);
     }
 
+    public void crearItemsMenuAgenda() {
+        iAgregarContacto = new JMenuItem("Agregar Contacto");
+        iAgregarContacto.addActionListener(this);
+        iAgregarContacto.setActionCommand("AgregarContacto");
+        menuAgenda.add(iAgregarContacto);
+
+        iEditarContacto = new JMenuItem("Editar Contacto");
+        iEditarContacto.addActionListener(this);
+        iEditarContacto.setActionCommand("EditarContacto");
+        menuAgenda.add(iEditarContacto);
+
+        iEliminarContacto = new JMenuItem("Eliminar Contacto");
+        iEliminarContacto.addActionListener(this);
+        iEliminarContacto.setActionCommand("EliminarContacto");
+        menuAgenda.add(iEliminarContacto);
+
+        iMostrarContacto = new JMenuItem("Mostrar Contacto");
+        iMostrarContacto.addActionListener(this);
+        iMostrarContacto.setActionCommand("MostrarContacto");
+        menuAgenda.add(iMostrarContacto);
+    }
+
     // Acciones de los botones
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -303,6 +331,15 @@ public class App implements ActionListener {
                     int contador = funcionesVer.buscarPalabra(textArea.getText(), palabra);
                     JOptionPane.showMessageDialog(ventana, "La palabra '" + palabra + "' aparece " + contador + " veces.");
                 }
+                break;
+            case "AgregarContacto":
+                FuncionesContacto formPanel = new FuncionesContacto();
+                JFrame frame = new JFrame("Agregar Contacto");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.getContentPane().add(formPanel);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
                 break;
         }
     }
