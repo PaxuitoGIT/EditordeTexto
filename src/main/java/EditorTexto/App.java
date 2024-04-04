@@ -20,7 +20,7 @@ public class App implements ActionListener {
     boolean SaltoLineaOn = false;
     // Menú Barra
     JMenuBar barraMenu;
-    JMenu menuArchivo, menuEditar, menuFormato, menuVer, menuAgenda;
+    JMenu menuArchivo, menuEditar, menuFormato, menuVer, menuAgenda, menuDibujo;
     // Archivo Menú Items
     JMenuItem iNuevo, iAbrir, iGuardar, iGuardarComo, iSalir;
     // Editar Menú
@@ -32,6 +32,8 @@ public class App implements ActionListener {
     JMenuItem iComparar, iAnalizarTexto, iBuscarPalabra;
     // Menú Agenda
     JMenuItem iAgregarContacto, iMostrarContacto;
+    // Menú Dibujo
+    JMenuItem iDibujar;
     // Funciones
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
     FuncionesFormato funcionesFormato = new FuncionesFormato(this);
@@ -39,6 +41,7 @@ public class App implements ActionListener {
     FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
     FuncionesContacto funcionesContacto = new FuncionesContacto(this);
     FuncionesMiscelaneas funcionesMiscelaneas = new FuncionesMiscelaneas();
+    FuncionesDibujo funcionesDibujo = new FuncionesDibujo(this);
 
     public static List<FuncionesContacto.Contacto> listaContactos = new ArrayList<>();
     UndoManager um = new UndoManager();
@@ -60,6 +63,7 @@ public class App implements ActionListener {
         CrearItemsMenuFormato();
         crearItemsMenuVer();
         crearItemsMenuAgenda();
+        crearItemsMenuDibujo();
 
         // Formato predeterminado
         funcionesFormato.FuenteSelect = "Arial";
@@ -122,6 +126,9 @@ public class App implements ActionListener {
 
         menuAgenda = new JMenu("Agenda");
         barraMenu.add(menuAgenda);
+
+        menuDibujo = new JMenu("Dibujo");
+        barraMenu.add(menuDibujo);
 
     }
 
@@ -258,6 +265,13 @@ public class App implements ActionListener {
         menuAgenda.add(iMostrarContacto);
     }
 
+    public void crearItemsMenuDibujo() {
+        iDibujar = new JMenuItem("Dibujar");
+        iDibujar.addActionListener(this);
+        iDibujar.setActionCommand("Dibujar");
+        menuDibujo.add(iDibujar);
+    }
+
     // Acciones de los botones
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -339,6 +353,9 @@ public class App implements ActionListener {
                 break;
             case "MostrarContacto":
                 funcionesContacto.mostrarContacto();
+                break;
+            case "Dibujar":
+                funcionesDibujo.Dibujar();
                 break;
         }
     }
