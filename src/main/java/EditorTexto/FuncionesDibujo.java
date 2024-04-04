@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 public class FuncionesDibujo extends JPanel {
 
     App app;
-    ArrayList<Point> points = new ArrayList<>();
+    ArrayList<Line2D> lines = new ArrayList<>();
+    Point lastPoint;
 
     // Heredar el constructor de la clase App
     public FuncionesDibujo(App app) {
@@ -27,13 +29,14 @@ public class FuncionesDibujo extends JPanel {
         MouseAdapter mouseAdapter = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                points.add(e.getPoint());
-                repaint();
+                lastPoint = e.getPoint();
             }
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                points.add(e.getPoint());
+                Point newPoint = e.getPoint();
+                lines.add(new Line2D.Float(lastPoint, newPoint));
+                lastPoint = newPoint;
                 repaint();
             }
         };
@@ -45,9 +48,10 @@ public class FuncionesDibujo extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.BLACK);
-        for (Point point : points) {
-            g.fillOval(point.x, point.y, 4, 4);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.BLACK);
+        for (Line2D line : lines) {
+            g2.draw(line);
         }
     }
 
