@@ -40,7 +40,7 @@ public class App implements ActionListener {
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
     FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
     FuncionesContacto funcionesContacto = new FuncionesContacto(this);
-    FuncionesMiscelaneas funcionesMiscelaneas = new FuncionesMiscelaneas();
+    FuncionesMiscelaneas funcionesMiscelaneas = new FuncionesMiscelaneas(this);
     FuncionesDibujo funcionesDibujo = new FuncionesDibujo(this);
 
     public static List<FuncionesContacto.Contacto> listaContactos = new ArrayList<>();
@@ -88,6 +88,9 @@ public class App implements ActionListener {
     public void CrearTextArea() {
 
         textArea = new JTextArea();
+        textArea.setFont(funcionesFormato.arial);
+
+        textArea.addKeyListener(funcionesMiscelaneas);
 
         // Deshacer y Rehacer
         textArea.getDocument().addUndoableEditListener(new UndoableEditListener() {
