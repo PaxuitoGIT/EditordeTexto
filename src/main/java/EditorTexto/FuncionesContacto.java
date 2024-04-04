@@ -1,6 +1,8 @@
 package EditorTexto;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FuncionesContacto extends JPanel {
 
@@ -18,6 +22,14 @@ public class FuncionesContacto extends JPanel {
     JTextField email;
     JButton guardarBoton;
     JButton cancelarBoton;
+
+    // Verifica si el correo electrónico es válido
+    boolean esEmailValido(String email) {
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)\\.[A-Za-z0-9+_.-]+$"; // Un correo electrónico válido debe tener un @ y un punto
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
 
 
     public static class Contacto {
@@ -177,6 +189,35 @@ public class FuncionesContacto extends JPanel {
         gbc.weightx = 1;
         gbc.weighty = 1;
         panel.add(filler, gbc);
+
+        // Verifica si el correo electrónico es válido
+        email.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificarEmail();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificarEmail();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificarEmail();
+            }
+
+            private void verificarEmail() {
+                String textoEmail = email.getText();
+                if (esEmailValido(textoEmail)) {
+                    // Si el correo electrónico es válido, cambia el color del texto a verde
+                    email.setForeground(new Color(0,128, 0));
+                } else {
+                    // Si el correo electrónico no es válido, cambia el color del texto a rojo
+                    email.setForeground(new Color(172, 0, 0));
+                }
+            }
+        });
 
         return panel;
 
