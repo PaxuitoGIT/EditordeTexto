@@ -4,14 +4,18 @@ import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class App implements ActionListener {
 
     JFrame ventana;
+    JTabbedPane tabbedPane = new JTabbedPane();
 
     // Texto
     JTextArea textArea;
@@ -19,7 +23,7 @@ public class App implements ActionListener {
     boolean SaltoLineaOn = false;
     // Menú Barra
     JMenuBar barraMenu;
-    JMenu menuArchivo, menuEditar, menuFormato, menuVer, menuAgenda;
+    JMenu menuArchivo, menuEditar, menuFormato, menuVer, menuAgenda, CrearPestanias;
     // Archivo Menú Items
     JMenuItem iNuevo, iAbrir, iGuardar, iGuardarComo, iSalir;
     // Editar Menú
@@ -33,7 +37,7 @@ public class App implements ActionListener {
     JMenuItem iAgregarContacto, iMostrarContacto;
     // Funciones
     FuncionesArchivo funcionesArchivo = new FuncionesArchivo(this);
-    FuncionesFormato funcionesFormato = new FuncionesFormato(this);
+    FuncionesFormato funcionesFormato = new FuncionesFormato(this );
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
     FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
     FuncionesContacto funcionesContacto = new FuncionesContacto(this);
@@ -51,6 +55,7 @@ public class App implements ActionListener {
     public App() {
 
         CrearVentana();
+        ventana.setContentPane(tabbedPane);
         CrearTextArea();
         CrearBarraMenu();
         CrearItemsMenuArchivo();
@@ -72,6 +77,37 @@ public class App implements ActionListener {
         ventana = new JFrame("Editor de Texto");
         ventana.setSize(800, 600);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+    // Crea las pestañas cuando se le da clic en el botón de Nuevo
+    public void crearPestanias() {
+        int index = tabbedPane.getTabCount() + 1;
+
+        JTextArea textArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        tabbedPane.addTab("Pestaña " + index, scrollPane);
+
+        JButton cerrarBoton = new JButton("X") {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(20, 20);
+            }
+        };
+
+        cerrarBoton.setMargin(new Insets(1, 1, 1, 1));
+        cerrarBoton.addActionListener(e -> {
+            int tabIndice = tabbedPane.indexOfComponent(scrollPane);
+            if (tabIndice != -1) {
+                tabbedPane.remove(tabIndice);
+            }
+        });
+
+        JPanel tabPanel = new JPanel(new BorderLayout());
+        tabPanel.add(new JLabel("Pestaña " + index), BorderLayout.CENTER);
+        tabPanel.add(cerrarBoton, BorderLayout.EAST);
+
+        tabbedPane.setTabComponentAt(tabbedPane.getTabCount() - 1, tabPanel);
 
     }
 
@@ -114,6 +150,16 @@ public class App implements ActionListener {
 
         menuAgenda = new JMenu("Agenda");
         barraMenu.add(menuAgenda);
+
+        barraMenu.add(Box.createHorizontalGlue());
+        CrearPestanias = new JMenu("Crear Pestañas");
+        CrearPestanias.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                crearPestanias();
+            }
+        });
+        barraMenu.add(CrearPestanias);
 
     }
 
