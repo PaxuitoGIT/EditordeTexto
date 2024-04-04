@@ -1,38 +1,50 @@
 package EditorTexto;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+class AppTest {
+
+    @org.junit.jupiter.api.Test
+    void main() {
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @org.junit.jupiter.api.Test
+    void crearVentana() {
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @org.junit.jupiter.api.Test
+    void crearTextArea() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void crearBarraMenu() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void crearItemsMenuArchivo() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void crearItemsMenuEditar() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void crearItemsMenuFormato() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void crearItemsMenuVer() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void crearItemsMenuAgenda() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void crearItemsMenuDibujo() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void actionPerformed() {
     }
 }
