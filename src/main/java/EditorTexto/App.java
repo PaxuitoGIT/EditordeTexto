@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.UndoManager;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class App implements ActionListener {
     FuncionesEditar funcionesEditar = new FuncionesEditar(this);
     FuncionesVer funcionesVer = new FuncionesVer(this, funcionesArchivo);
     FuncionesContacto funcionesContacto = new FuncionesContacto(this);
+    FuncionesMiscelaneas funcionesMiscelaneas = new FuncionesMiscelaneas();
 
     public static List<FuncionesContacto.Contacto> listaContactos = new ArrayList<>();
     UndoManager um = new UndoManager();
@@ -73,6 +75,9 @@ public class App implements ActionListener {
         ventana.setSize(800, 600);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Agregar etiqueta de posición del ratón
+        ventana.add(funcionesMiscelaneas.getMousePositionLabel(), BorderLayout.SOUTH);
+
     }
 
     // Crea el área de texto
@@ -86,6 +91,9 @@ public class App implements ActionListener {
                 um.addEdit(e.getEdit());
             }
         });
+
+        // Mouse Tracking
+        funcionesMiscelaneas.addMouseTracking(textArea);
 
         // Barra de desplazamiento
         scrollVentana = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
