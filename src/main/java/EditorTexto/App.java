@@ -67,7 +67,7 @@ public class App implements ActionListener {
 
         // Formato predeterminado
         funcionesFormato.FuenteSelect = "Arial";
-        funcionesFormato.crearFuente(12);
+        funcionesFormato.crearFuente(16);
         funcionesFormato.SaltoLinea();
         ventana.setVisible(true);
     }
