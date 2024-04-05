@@ -12,11 +12,14 @@ import java.util.List;
 
 public class App implements ActionListener {
 
+    // La ventana de la aplicación
     JFrame ventana;
 
-    // Texto
+    // Área de texto
     JTextArea textArea;
+    // Barra de desplazamiento
     JScrollPane scrollVentana;
+    // Salto de línea
     boolean SaltoLineaOn = false;
     // Menú Barra
     JMenuBar barraMenu;
@@ -43,7 +46,9 @@ public class App implements ActionListener {
     FuncionesMiscelaneas funcionesMiscelaneas = new FuncionesMiscelaneas(this);
     FuncionesDibujo funcionesDibujo = new FuncionesDibujo(this);
 
+    // Lista de contactos
     public static List<FuncionesContacto.Contacto> listaContactos = new ArrayList<>();
+    // Deshacer y Rehacer
     UndoManager um = new UndoManager();
 
     public static void main( String[] args ) {
@@ -55,6 +60,7 @@ public class App implements ActionListener {
     // Constructor
     public App() {
 
+        // Hace visible las barras de menú
         CrearVentana();
         CrearTextArea();
         CrearBarraMenu();
@@ -256,6 +262,7 @@ public class App implements ActionListener {
         menuVer.add(iBuscarPalabra);
     }
 
+    // Crea los items del menú Agenda
     public void crearItemsMenuAgenda() {
         iAgregarContacto = new JMenuItem("Agregar Contacto");
         iAgregarContacto.addActionListener(this);
@@ -268,6 +275,7 @@ public class App implements ActionListener {
         menuAgenda.add(iMostrarContacto);
     }
 
+    // Crea los items del menú Dibujo
     public void crearItemsMenuDibujo() {
         iDibujar = new JMenuItem("Dibujar");
         iDibujar.addActionListener(this);

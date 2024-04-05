@@ -20,11 +20,8 @@ public class FuncionesDibujo extends JPanel {
         setupDrawing();
     }
 
-    public FuncionesDibujo() {
-        setBackground(Color.WHITE);
-        setupDrawing();
-    }
 
+    // Dibuja las líneas cuandp se clickea y se arrastra el mouse
     private void setupDrawing() {
         MouseAdapter mouseAdapter = new MouseAdapter() {
             @Override
@@ -45,6 +42,7 @@ public class FuncionesDibujo extends JPanel {
         addMouseMotionListener(mouseAdapter);
     }
 
+    // Pinta las líneas de color negro
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -55,11 +53,12 @@ public class FuncionesDibujo extends JPanel {
         }
     }
 
+    // Abre una ventana nueva para dibujar
     public void Dibujar() {
         JFrame frame = new JFrame("Dibujar");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800, 600);
-        frame.add(new FuncionesDibujo());
+        frame.add(new FuncionesDibujo(this.app));
         frame.setVisible(true);
     }
 }

@@ -29,6 +29,7 @@ public class FuncionesArchivo {
     // Abre un archivo
     public void Abrir() {
 
+        // Abre un cuadro de diálogo para seleccionar el archivo
         FileDialog fd = new FileDialog(app.ventana, "Abrir", FileDialog.LOAD);
         fd.setVisible(true);
 
@@ -40,7 +41,7 @@ public class FuncionesArchivo {
         }
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(DireccionArchivo + NombreArchivo));
+            BufferedReader br = new BufferedReader(new FileReader(DireccionArchivo + NombreArchivo)); // Lee el archivo
 
             app.textArea.setText("");
 
@@ -59,7 +60,7 @@ public class FuncionesArchivo {
     // Guarda el archivo
     public void Guardar() {
 
-        // Sobre escribe el archivo
+        // Sobrescribe el archivo
         if(NombreArchivo == null) {
             GuardarComo();
         } else {

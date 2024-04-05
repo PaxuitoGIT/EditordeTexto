@@ -32,6 +32,7 @@ public class FuncionesContacto extends JPanel {
     }
 
 
+    // Clase Contacto
     public static class Contacto {
 
         String nombre;
@@ -46,6 +47,7 @@ public class FuncionesContacto extends JPanel {
             this.descripcion = descripcion;
         }
     }
+    // Constructor de la clase FuncionesContacto
     public FuncionesContacto(App app) {
         this.app = app;
 
@@ -54,7 +56,7 @@ public class FuncionesContacto extends JPanel {
         add(createButtonsPane(), BorderLayout.SOUTH);
 
     }
-
+// Cuando se pinche en el botón de agregar contacto, se abrirá una ventana para agregar un contacto
     public void agregarContacto() {
         FuncionesContacto formPanel = new FuncionesContacto(app);
         JFrame frame = new JFrame("Agregar Contacto");
@@ -64,7 +66,7 @@ public class FuncionesContacto extends JPanel {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
+// Cuando se pinche en el botón de mostrar contacto, se abrirá una ventana para seleccionar el archivo del contacto guardado
     public void mostrarContacto() {
         FileDialog fd = new FileDialog((Frame) null, "Selecciona el archivo de contacto");
         fd.setDirectory(System.getProperty("user.dir")); // Esto apunta al directorio del proyecto supuestamente
